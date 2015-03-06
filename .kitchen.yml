@@ -1,0 +1,22 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+   name: chef_solo
+
+platforms:
+  - name: centos-6.5
+  - name: macosx-10.10
+    driver:
+      box: macosx-10.10
+      box_url: https://www.dropbox.com/s/jpidtbkxlao0uz3/macosx-10.10.box?dl=0
+      username: vagrant
+      vm_hostname: macosx
+
+suites:
+  - name: default
+    data_bags_path: test/integration/data_bags
+    run_list:
+      - recipe[resin]
+    attributes: ~
