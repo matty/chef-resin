@@ -4,7 +4,7 @@ maintainer_email 'team@foreflight.com'
 license          'Apache2'
 description      'Installs Resin.'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.2'
+version          '0.2.21'
 
 depends 'build-essential'
 depends 'java'
@@ -13,4 +13,5 @@ depends 'sysctl'
 depends 'yum-epel'
 
 supports 'rhel'
-supports 'mac_os_x'
+supports 'mac_os_x', '~> 10.10.2'
+supports 'amazon'
