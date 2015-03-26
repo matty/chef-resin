@@ -1,13 +1,12 @@
-#TODO: Clean up recipe.
-base_directory = node['resin']['base_dir']
+resin_user = node[:resin][:user]
+resin_alias = node[:resin][:home]
+resin_base_dir = node[:resin][:base_dir]
+resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
 resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-4.tar.gz"
-resin_directory = "#{base_directory}/resin-pro-#{node[:resin][:version]}"
-resin_alias = "#{base_directory}/resin"
-resin_user = node['resin']['user']
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
 packages = %w( htop tree wget pcre )
 
-directory base_directory do
+directory resin_base_dir do
   owner resin_user
 end
 
@@ -36,7 +35,7 @@ remote_file resin_file do
 end
 
 execute 'untar resin' do
-  command "tar -xzf #{resin_file} --directory #{base_directory}"
+  command "tar -xzf #{resin_file} --directory #{resin_base_dir}"
   creates resin_directory
   user resin_user
 end
@@ -53,9 +52,9 @@ end
 
 bash 'install resin' do
   code <<-EOH
-    ./configure --prefix=#{resin_directory}
-    make
-    make install
+./configure --prefix=#{resin_directory}
+make
+make install
   EOH
   cwd resin_directory
   user resin_user

@@ -4,3 +4,8 @@ rvm:
     - 2.1.4
 script:
     - bundle exec rake travis
+gemfile:
+  - Gemfile
+branches:
+  only:
+    - master
