@@ -8,7 +8,7 @@ in tests if you need a reference.
 	
 License
 -------
-Copyright:: 2015, ForeFlight LLC, Inc
+Copyright:: 2015, ForeFlight LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
