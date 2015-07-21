@@ -5,3 +5,5 @@ default[:resin][:base_dir] = File.expand_path("..", node[:resin][:home])
 default[:resin][:version] = '4.0.41'
 default[:resin][:sqlitejdbc][:version] = '3.8.5-pre1'
 default[:resin][:postgresql][:version] = '9.3-1102-jdbc41'
+default[:resin][:postgis][:jdbc][:version] = '1.3.3'
+default[:resin][:postgis][:stubs][:version] = '1.3.3'

@@ -93,3 +93,17 @@ unless node[:resin][:postgresql].nil?
     source "#{maven_search_path}org/postgresql/postgresql/#{psql_version}/postgresql-#{psql_version}.jar"
   end
 end
+
+unless node[:resin][:postgis].nil?
+  postgis_jdbc_version = node[:resin][:postgis][:jdbc][:version]
+  remote_file 'install postgis jdbc' do
+    path "#{resin_alias}/ext-lib/postgis-jdbc-#{postgis_jdbc_version}.jar"
+    source "#{maven_search_path}org/postgis/postgis-jdbc/#{postgis_jdbc_version}/postgis-jdbc-#{postgis_jdbc_version}.jar"
+  end
+
+  postgis_stubs_version = node[:resin][:postgis][:stubs][:version]
+  remote_file 'install postgis stubs' do
+    path "#{resin_alias}/ext-lib/postgis-stubs-#{postgis_stubs_version}.jar"
+    source "#{maven_search_path}org/postgis/postgis-stubs/#{postgis_stubs_version}/postgis-stubs-#{postgis_stubs_version}.jar"
+  end
+end
