@@ -6,8 +6,8 @@ provisioner:
    name: chef_solo
 
 platforms:
-  - name: centos-6.5
-  - name: macosx-10.10
+  - name: centos-6
+  - name: macosx
     driver:
       name: vagrant
       provider: virtualbox
