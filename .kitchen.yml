@@ -9,10 +9,13 @@ platforms:
   - name: centos-6.5
   - name: macosx-10.10
     driver:
-      box: macosx-10.10
-      box_url: https://www.dropbox.com/s/jpidtbkxlao0uz3/macosx-10.10.box?dl=0
+      name: vagrant
+      provider: virtualbox
+      box: jhcook/osx-yosemite-10.10
       username: vagrant
       vm_hostname: macosx
+      customize:
+        memory: 8192
 
 suites:
   - name: default
