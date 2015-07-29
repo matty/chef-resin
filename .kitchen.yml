@@ -6,7 +6,7 @@ provisioner:
    name: chef_solo
 
 platforms:
-  - name: centos-6
+  - name: centos-6.6
   - name: macosx
     driver:
       name: vagrant
