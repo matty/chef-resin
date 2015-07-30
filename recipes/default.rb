@@ -2,7 +2,7 @@ resin_user = node[:resin][:user]
 resin_alias = node[:resin][:home]
 resin_base_dir = node[:resin][:base_dir]
 resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
-resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-4.tar.gz"
+resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-#{node[:resin][:version]}.tar.gz"
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
 packages = %w( htop tree wget pcre )
 
@@ -32,12 +32,14 @@ end
 
 remote_file resin_file do
   source "http://caucho.com/download/resin-pro-#{node[:resin][:version]}.tar.gz"
+  not_if { ::File.exists?(resin_file) }
 end
 
 execute 'untar resin' do
   command "tar -xzf #{resin_file} --directory #{resin_base_dir}"
   creates resin_directory
   user resin_user
+  not_if { ::File.exists?(resin_directory) }
 end
 
 execute 'link resin' do
