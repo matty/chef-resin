@@ -42,9 +42,8 @@ execute 'untar resin' do
   not_if { ::File.exists?(resin_directory) }
 end
 
-execute 'link resin' do
-  command "ln -sf #{resin_directory} #{resin_alias}"
-  user resin_user
+link resin_directory do
+  to resin_alias
 end
 
 directory "#{resin_alias}/ext-lib" do
