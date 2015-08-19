@@ -42,8 +42,8 @@ execute 'untar resin' do
   not_if { ::File.exists?(resin_directory) }
 end
 
-link resin_directory do
-  to resin_alias
+link resin_alias do
+  to resin_directory
   user resin_user
 end
 
