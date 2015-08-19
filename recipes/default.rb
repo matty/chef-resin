@@ -44,6 +44,7 @@ end
 
 link resin_directory do
   to resin_alias
+  user resin_user
 end
 
 directory "#{resin_alias}/ext-lib" do
