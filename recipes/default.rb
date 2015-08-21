@@ -76,6 +76,8 @@ begin
       backup 0
     end
   end
+rescue
+  # Ignore if data bag doesn't exist
 end
 
 unless node[:resin][:sqlitejdbc].nil?
