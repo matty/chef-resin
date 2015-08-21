@@ -69,13 +69,11 @@ make install
   end
 end
 
-unless data_bag('resin').empty?
-  unless data_bag_item('resin', 'licenses').empty?
-    data_bag_item('resin', 'licenses')['license_keys'].each do |license_key,license_value|
-      file "#{resin_directory}/licenses/#{license_key}.license" do
-        content license_value
-        backup 0
-      end
+begin
+  data_bag_item('resin', 'licenses')['license_keys'].each do |license_key, license_value|
+    file "#{resin_directory}/licenses/#{license_key}.license" do
+      content license_value
+      backup 0
     end
   end
 end
