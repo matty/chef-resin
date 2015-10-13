@@ -96,13 +96,15 @@ unless node[:resin][:postgresql].nil?
   end
 end
 
-unless node[:resin][:postgis].nil?
+unless node[:resin][:postgis][:jdbc][:version].nil?
   postgis_jdbc_version = node[:resin][:postgis][:jdbc][:version]
   remote_file 'install postgis jdbc' do
     path "#{resin_alias}/ext-lib/postgis-jdbc-#{postgis_jdbc_version}.jar"
     source "#{maven_search_path}org/postgis/postgis-jdbc/#{postgis_jdbc_version}/postgis-jdbc-#{postgis_jdbc_version}.jar"
   end
+end
 
+unless node[:resin][:postgis][:stubs][:version].nil?
   postgis_stubs_version = node[:resin][:postgis][:stubs][:version]
   remote_file 'install postgis stubs' do
     path "#{resin_alias}/ext-lib/postgis-stubs-#{postgis_stubs_version}.jar"
