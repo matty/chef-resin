@@ -4,7 +4,6 @@ resin_base_dir = node[:resin][:base_dir]
 resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
 resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-#{node[:resin][:version]}.tar.gz"
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
-packages = %w( htop tree wget libpcre3 )
 
 directory resin_base_dir do
   owner resin_user
@@ -23,11 +22,6 @@ if platform_family?('rhel')
     baseurl 'http://elgis.argeo.org/repos/6/elgis/x86_64/'
     gpgkey 'http://elgis.argeo.org/RPM-GPG-KEY-ELGIS'
   end
-end
-
-# Install all packages.
-packages.each do |library|
-  package library
 end
 
 remote_file resin_file do
@@ -80,34 +74,10 @@ rescue
   # Ignore if data bag doesn't exist
 end
 
-unless node[:resin][:sqlitejdbc].nil?
-  sqlite_version = node[:resin][:sqlitejdbc][:version]
-  remote_file 'install sqlitejdbc' do
-    path "#{resin_alias}/ext-lib/sqlite-jdbc-#{sqlite_version}.jar"
-    source "#{maven_search_path}org/xerial/sqlite-jdbc/#{sqlite_version}/sqlite-jdbc-#{sqlite_version}.jar"
-  end
-end
-
-unless node[:resin][:postgresql].nil?
-  psql_version = node[:resin][:postgresql][:version]
-  remote_file 'install progresql jdbc' do
-    path "#{resin_alias}/ext-lib/postgresql-#{psql_version}.jar"
-    source "#{maven_search_path}org/postgresql/postgresql/#{psql_version}/postgresql-#{psql_version}.jar"
-  end
-end
-
-unless node[:resin][:postgis][:jdbc][:version].nil?
-  postgis_jdbc_version = node[:resin][:postgis][:jdbc][:version]
-  remote_file 'install postgis jdbc' do
-    path "#{resin_alias}/ext-lib/postgis-jdbc-#{postgis_jdbc_version}.jar"
-    source "#{maven_search_path}org/postgis/postgis-jdbc/#{postgis_jdbc_version}/postgis-jdbc-#{postgis_jdbc_version}.jar"
-  end
-end
-
-unless node[:resin][:postgis][:stubs][:version].nil?
-  postgis_stubs_version = node[:resin][:postgis][:stubs][:version]
-  remote_file 'install postgis stubs' do
-    path "#{resin_alias}/ext-lib/postgis-stubs-#{postgis_stubs_version}.jar"
-    source "#{maven_search_path}org/postgis/postgis-stubs/#{postgis_stubs_version}/postgis-stubs-#{postgis_stubs_version}.jar"
+unless node[:resin][:mysql][:connector][:version].nil?
+  mysql_connector_version = node[:resin][:mysql][:connector][:version]
+  remote_file 'install mysql connector' do
+    path "#{resin_alias}/ext-lib/mysql-connector-java-#{mysql_connector_version}.jar"
+    source "#{maven_search_path}mysql/mysql-connector-java/#{mysql_connector_version}/mysql-connector-java-#{mysql_connector_version}.jar"
   end
 end
