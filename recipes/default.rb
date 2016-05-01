@@ -4,7 +4,7 @@ resin_base_dir = node[:resin][:base_dir]
 resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
 resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-#{node[:resin][:version]}.tar.gz"
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
-packages = %w( htop tree wget pcre )
+packages = %w( htop tree wget libpcre3 )
 
 directory resin_base_dir do
   owner resin_user
