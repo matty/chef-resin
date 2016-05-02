@@ -50,7 +50,7 @@ end
 
 bash 'install resin' do
 
-if resin_apache2 do
+if resin_apache2
   code <<-EOH
 ./configure --prefix=#{resin_directory} --with-apxs
 make
