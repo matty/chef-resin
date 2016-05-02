@@ -5,6 +5,8 @@ resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
 resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-#{node[:resin][:version]}.tar.gz"
 resin_apache2 = node[:resin][:apache2]
 resin_apache2_dir = node[:resin][:apache2_dir]
+resin_apache2_libexec = node[:resin][:apache2_libexec]
+resin_apache2_conf = node[:resin][:apache2_conf]
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
 
 directory resin_base_dir do
@@ -52,7 +54,7 @@ bash 'install resin' do
 
 if resin_apache2
   code <<-EOH
-./configure --prefix=#{resin_directory} --with-apache=#{resin_apache2_dir}
+./configure --prefix=#{resin_directory} --with-apache=#{resin_apache2_dir} --with-apache-libexec=#{resin_apache2_libexec} --with-apache-conf=#{resin_apache2_conf}
 make
 make install
   EOH

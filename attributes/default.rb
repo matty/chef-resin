@@ -5,4 +5,6 @@ default[:resin][:base_dir] = File.expand_path("..", node[:resin][:home])
 default[:resin][:version] = '4.0.48'
 default[:resin][:apache2] = false
 default[:resin][:apache2_dir] = '/etc/apache2'
+default[:resin][:apache2_libexec] = '/usr/lib/apache2/modules'
+default[:resin][:apache2_conf] = '/etc/apache2/apache2.conf'
 default[:resin][:mysql][:connector][:version] = '5.1.38'
