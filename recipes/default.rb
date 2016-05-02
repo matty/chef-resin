@@ -3,6 +3,8 @@ resin_alias = node[:resin][:home]
 resin_base_dir = node[:resin][:base_dir]
 resin_directory = "#{resin_base_dir}/resin-pro-#{node[:resin][:version]}"
 resin_file = "#{Chef::Config[:file_cache_path]}/resin-pro-#{node[:resin][:version]}.tar.gz"
+resin_apache2 = node[:resin][:apache2]
+resin_apache2_dir = node[:resin][:apache2_dir]
 maven_search_path = "http://search.maven.org/remotecontent?filepath="
 
 directory resin_base_dir do
@@ -47,11 +49,20 @@ directory "#{resin_alias}/ext-lib" do
 end
 
 bash 'install resin' do
+
+if resin_apache2 do
+  code <<-EOH
+./configure --prefix=#{resin_directory} --with-apxs
+make
+make install
+  EOH
+else
   code <<-EOH
 ./configure --prefix=#{resin_directory}
 make
 make install
   EOH
+end
   cwd resin_directory
   user resin_user
   not_if do
