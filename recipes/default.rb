@@ -52,7 +52,7 @@ bash 'install resin' do
 
 if resin_apache2
   code <<-EOH
-./configure --prefix=#{resin_directory} --with-apxs
+./configure --prefix=#{resin_directory} --with-apache=#{resin_apache2_dir}
 make
 make install
   EOH
